@@ -2,7 +2,7 @@ import org.junit.Before;
 import org.junit.Test;
 import praktikum.Bun;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BunTests {
     private final String name = "such bun";
@@ -15,6 +15,10 @@ public class BunTests {
     @Test
     public void getNameTest(){
         assertEquals(name,bun.getName());
+    }
+    @Test
+    public void getPriceTest(){
+        assertEquals(price,bun.getPrice(),0f);
     }
 
 }
