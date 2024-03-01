@@ -12,6 +12,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
         <dependency>
@@ -20,12 +21,12 @@
             <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin -->
-        <dependency>
-            <groupId>org.jacoco</groupId>
-            <artifactId>jacoco-maven-plugin</artifactId>
-            <version>0.8.11</version>
-        </dependency>
+<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.jacoco/jacoco-maven-plugin &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.jacoco</groupId>-->
+<!--            <artifactId>jacoco-maven-plugin</artifactId>-->
+<!--            <version>0.8.11</version>-->
+<!--        </dependency>-->
         <!-- https://mvnrepository.com/artifact/org.scalatestplus/junit-4-13 -->
         <dependency>
             <groupId>org.scalatestplus</groupId>
@@ -33,9 +34,35 @@
             <version>3.3.0.0-alpha.1</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.7</version>
+                <executions>
+                    <execution>
+                        <!--id выбираешь самостоятельно-->
+                        <id>prepare-agent</id>
+                        <!--в какой фазе maven будет выполняться цель-->
+                        <phase>initialize</phase>
+                        <!--цель jacoco, которую нужно выполнить-->
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
