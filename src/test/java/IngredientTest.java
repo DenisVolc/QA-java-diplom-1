@@ -1,16 +1,39 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import praktikum.Ingredient;
 import praktikum.IngredientType;
 
 import static org.junit.Assert.assertEquals;
-
+@RunWith(Parameterized.class)
 public class IngredientTest {
-    private final String name = "such bun";
-    private final float price = 100F;
-    private IngredientType type = IngredientType.SAUCE;
+    private String name;
+    private float price;
+    private IngredientType type = IngredientType.FILLING;
     private Ingredient ingredient;
+
+    public IngredientTest(IngredientType type, float price,String name ) {
+        this.name = name;
+        this.price = price;
+        this.type = type;
+    }
+//https://pairwise.teremokgames.com/4hng0/
+    @Parameterized.Parameters
+    public static Object[][] testData(){
+        return new Object[][]{
+                {IngredientType.FILLING,	10F,	"Bun"},
+                {IngredientType.FILLING,	0,	null},
+                {IngredientType.FILLING,	-10F,	"Bun"},
+                {IngredientType.FILLING,	0,	"Bun"},
+                {null,	-10F,	null},
+                {null,	10F,	"Bun"},
+                {null,	0,	"Bun"}
+
+        };
+    }
+
     @Before
     public void createIngredient(){
         ingredient = new Ingredient(type,name,price);
