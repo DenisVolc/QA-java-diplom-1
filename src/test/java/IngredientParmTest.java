@@ -8,19 +8,19 @@ import praktikum.IngredientType;
 
 import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
-public class IngredientTest {
+public class IngredientParmTest {
     private String name;
     private float price;
-    private IngredientType type = IngredientType.FILLING;
+    private IngredientType type;
     private Ingredient ingredient;
 
-    public IngredientTest(IngredientType type, float price,String name ) {
+    public IngredientParmTest(IngredientType type, float price, String name ) {
         this.name = name;
         this.price = price;
         this.type = type;
     }
-//https://pairwise.teremokgames.com/4hng0/
-    @Parameterized.Parameters
+
+    @Parameterized.Parameters //https://pairwise.teremokgames.com/4hng0/
     public static Object[][] testData(){
         return new Object[][]{
                 {IngredientType.FILLING,	10F,	"Bun"},
@@ -30,7 +30,6 @@ public class IngredientTest {
                 {null,	-10F,	null},
                 {null,	10F,	"Bun"},
                 {null,	0,	"Bun"}
-
         };
     }
 
@@ -50,6 +49,5 @@ public class IngredientTest {
     public void getTypeTest(){
         assertEquals(type,ingredient.getType());
     }
-
 
 }
