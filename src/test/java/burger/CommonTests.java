@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class CommonTests {
     Burger burger = new Burger();
     @Mock
-    protected Bun bunX;
+    protected Bun bun;
     @Mock
     protected Ingredient ingredient0;
     @Mock
@@ -26,8 +26,8 @@ public class CommonTests {
     public void setTestData(){
         MockitoAnnotations.initMocks(this);
 
-        Mockito.when(bunX.getName()).thenReturn("Бриошь");
-        Mockito.when(bunX.getPrice()).thenReturn(150F);
+        Mockito.when(bun.getName()).thenReturn("Бриошь");
+        Mockito.when(bun.getPrice()).thenReturn(150F);
 
         Mockito.when(ingredient0.getName()).thenReturn("hot sauce");
         Mockito.when(ingredient0.getType()).thenReturn(IngredientType.SAUCE);
@@ -40,8 +40,8 @@ public class CommonTests {
     }
     @Test
     public void setBunsTest(){
-        burger.setBuns(bunX);
-        assertEquals(bunX.getName(),burger.bun.getName());
+        burger.setBuns(bun);
+        assertEquals(bun.getName(),burger.bun.getName());
     }
     @Test
     public void addIngredientTest(){
@@ -56,24 +56,24 @@ public class CommonTests {
     }
     @Test
     public void getPriceTest(){
-        burger.setBuns(bunX);
+        burger.setBuns(bun);
         burger.addIngredient(ingredient0);
-        float expectedPrice = bunX.getPrice() * 2;
+        float expectedPrice = bun.getPrice() * 2;
         expectedPrice += ingredient0.getPrice();
         assertEquals(expectedPrice,burger.getPrice(),0F);
     }
     @Test
     public void getReceiptTest(){
-        burger.setBuns(bunX);
+        burger.setBuns(bun);
         burger.addIngredient(ingredient0);
 
-        float expectedPrice = bunX.getPrice() * 2;
+        float expectedPrice = bun.getPrice() * 2;
         expectedPrice += ingredient0.getPrice();
 
         String expectedReceipt =
-                String.format("(==== %s ====)%n", bunX.getName()) +
+                String.format("(==== %s ====)%n", bun.getName()) +
                 String.format("= %s %s =%n", ingredient0.getType().toString().toLowerCase(), ingredient0.getName()) +
-                String.format("(==== %s ====)%n", bunX.getName()) +
+                String.format("(==== %s ====)%n", bun.getName()) +
                 String.format("%nPrice: %f%n", expectedPrice);
 
         assertEquals(expectedReceipt,burger.getReceipt());
